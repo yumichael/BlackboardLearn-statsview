@@ -1,4 +1,6 @@
 import re
+import time
+import random
 import pandas as pd
 import json
 from io import StringIO
@@ -27,7 +29,13 @@ class Model(metaclass=Singleton):
         self.update()
 
     def update(self):
-        self.create_with(*update.pull())
+        while True:
+            try:
+                results = update.pull()
+                break
+            except Exception: # I'm guessing this can happen if forked processes ping UofT too quickly
+                time.sleep(random.randint(12, 32))
+        self.create_with(*results)
         self.timestamp = datetime.now()
         self.transform()
 
