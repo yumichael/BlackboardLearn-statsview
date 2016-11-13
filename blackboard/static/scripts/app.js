@@ -46,6 +46,8 @@ function refreshPlot() {
 
 $(document).ready(function () {
     makePlot();
+    $(".click-metric[value='" + metric + "']").addClass('active');
+    $(".click-group[value='" + group + "']").addClass('active');
     $('.click-metric').click(function () {
         $('.click-metric.active').removeClass('active');
         $(this).addClass('active');
