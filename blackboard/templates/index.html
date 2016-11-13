@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div id="the-plot">
+
+</div>
+
+<div class="text-center">
+    <div class="row">
+        <div class="btn-group">
+            {% for metric in metrics %}
+            <button type="button" class="btn btn-default click-metric" value="{{ metric }}">
+                {{ metric }}
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+<br />
+    <div class="row">
+        <div class="btn-group">
+            {% for group in groups %}
+            <button type="button" class="btn btn-default click-group" value="{{ group }}">
+                {{ group }}
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>var grades = {{ json_data|safe }}; var info = {{ json_info|safe }};</script>
+<script src="/static/scripts/app.js"></script>
+{% endblock %}
