@@ -32,7 +32,7 @@ def pull():
     grades_url += '?dispatch=viewDownloadOptions&course_id=_846126_1'
     br.open(grades_url)
     options_form = br.get_form(attrs={'name':'downloadGradebookForm'})
-    br.submit_form(options_form, submit=options_form['bottom_Submit'])
+    br.submit_form(options_form, submit=options_form['top_Submit'])
     download_form = br.get_form('download_form')
     br.submit_form(download_form)
     grades_raw = br.parsed.string
