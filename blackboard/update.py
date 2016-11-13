@@ -5,7 +5,7 @@ from robobrowser import RoboBrowser
 from blackboard.utility import *
 
 def pull():
-    br = RoboBrowser(history=True)
+    br = RoboBrowser(history=True, parser='lxml')
     site_url = 'https://portal.utoronto.ca'
 
     # First we log in to the UofT weblogin
