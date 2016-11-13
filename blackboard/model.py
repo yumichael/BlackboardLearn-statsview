@@ -3,6 +3,7 @@ import pandas as pd
 import json
 from io import StringIO
 from datetime import datetime, timedelta
+from pytz import timezone
 from blackboard.utility import *
 
 import flask
@@ -18,7 +19,7 @@ class Model(metaclass=Singleton):
     def update(self):
         results = update.pull()
         self.create_with(*results)
-        self.timestamp = datetime.now()
+        self.timestamp = datetime.now(tz=timezone("EST"))
         self.transform()
 
     def create_with(self, grades_raw, group_dict):

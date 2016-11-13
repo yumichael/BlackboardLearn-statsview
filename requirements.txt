@@ -4,3 +4,4 @@ gunicorn==19.6.0
 pandas==0.19.1
 robobrowser==0.5.3
 lxml==3.6.4
+pytz==2016.6.1
