@@ -1,5 +1,6 @@
 Flask<1
-Flask-APScheduler>=1.5.0
-gunicorn>=19.6.0
-pandas>=0.19.1
-robobrowser>=0.5.3
+Flask-APScheduler==1.5.0
+gunicorn==19.6.0
+pandas==0.19.1
+robobrowser==0.5.3
+lxml==3.6.4
