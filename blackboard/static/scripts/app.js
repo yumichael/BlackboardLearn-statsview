@@ -24,7 +24,7 @@ var layout = {
         dtick: totalPoints[metric] / 10
     },
     yaxis: {
-        range: [0, 12]
+        range: [0, 18]
     }
 };
 
