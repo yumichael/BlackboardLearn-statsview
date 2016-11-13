@@ -6,9 +6,13 @@ import os
 from datetime import datetime
 from flask import render_template
 from blackboard import app
-from blackboard.model import Model#, model
+from blackboard.model import Model
+from jinja2 import Environment
 
 Model()
+
+def datetimeformat(value, format='%Y-%m-%d %H:%M'):
+    return value.strftime(format)
 
 @app.route('/')
 @app.route('/home')
@@ -22,7 +26,8 @@ def home():
         metrics=sorted(Model().output),
         groups=sorted(Model().output['Test 1']),
         json_data=Model().json_output,
-        json_info=Model().json_info
+        json_info=Model().json_info,
+        timestamp=datetimeformat(Model().timestamp)
     )
 
 @app.route('/contact')
