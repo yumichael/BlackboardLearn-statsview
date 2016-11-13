@@ -40,3 +40,13 @@ def contact():
         dev_email=os.environ['DEV_EMAIL'],
         year=datetime.now().year,
     )
+
+@app.route('/source')
+def source():
+    """Renders the source page."""
+    return render_template(
+        'source.html',
+        github_url='https://github.com/yumichael/MAT194-gradeview',
+        dev_name=os.environ['DEV_NAME'],
+        year=datetime.now().year,
+    )
