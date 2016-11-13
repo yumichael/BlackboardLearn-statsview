@@ -21,7 +21,7 @@ var layout = {
         title: 'Grade',
         range: [-totalPoints[metric] / 40, totalPoints[metric] * 1.025],
         tick0: 0,
-        dtick: totalPoints[metric] / 20
+        dtick: totalPoints[metric] / 10
     },
     yaxis: {
         range: [0, 12]
@@ -38,7 +38,7 @@ function refreshPlot() {
     plotData[0].x = grades[metric][group];
     plotData[0].xbins.end = totalPoints[metric] * 1.025;
     plotData[0].xbins.size = totalPoints[metric] / 20;
-    layout.xaxis.dtick = totalPoints[metric] / 20;
+    layout.xaxis.dtick = totalPoints[metric] / 10;
     //Plotly.purge(plotID);
     //$('#' + plotID).empty();
     Plotly.redraw(plotID);
