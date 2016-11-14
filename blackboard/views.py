@@ -9,10 +9,30 @@ from blackboard import app
 from blackboard.model import Model
 from jinja2 import Environment
 
-Model()
+from functools import wraps
+from flask import redirect, request, current_app
+
+def support_jsonp(func): # see https://gist.github.com/aisipos/1094140
+    """Wraps JSONified output for JSONP requests."""
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        callback = request.args.get('callback', False)
+        if callback:
+            resp = func(*args, **kwargs)
+            resp.set_data('{}({})'.format(
+                str(callback),
+                resp.get_data(as_text=True)
+            ))
+            resp.mimetype = 'application/javascript'
+            return resp
+        else:
+            return func(*args, **kwargs)
+    return decorated_function
 
 def datetimeformat(value, format='%Y-%m-%d %H:%M'):
     return value.strftime(format)
+
+Model()
 
 @app.route('/')
 @app.route('/home')
@@ -52,5 +72,6 @@ def source():
     )
 
 @app.route('/ping')
+@support_jsonp
 def pong():
     return jsonify(pong=1)
