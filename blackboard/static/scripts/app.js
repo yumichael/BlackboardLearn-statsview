@@ -101,10 +101,9 @@ $(document).ready(function () {
 // Stats functions
 function mean(numbers) {
     // mean of [3, 5, 4, 4, 1, 1, 2, 3] is 2.875
-    var total = 0,
-        i;
-    for (i = 0; i < numbers.length; i += 1) {
-        total += numbers[i];
+    var total = 0;
+    for (i = 0; i < numbers.length; ++i) {
+        total += !isNaN(numbers[i]) ? numbers[i] : 0;
     }
     return total / numbers.length;
 }
