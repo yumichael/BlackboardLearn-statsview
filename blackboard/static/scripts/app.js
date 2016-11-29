@@ -58,7 +58,7 @@ function makePlot() {
 }
 
 function refreshPlot() {
-    layout.title = 'Trying to update... perhaps this data is missing';
+    layout.title = 'Missing data';
     layout.xaxis.range = [0, 1];
     plotData[0].x = [];
     plotData[0].xbins.end = 1;
