@@ -25,7 +25,32 @@ var layout = {
     },
     yaxis: {
         range: [0, 18]
-    }
+    },
+    shapes: [{
+        'line': {
+            'color': '#0099FF', 'dash': 'solid', 'width': 1
+        },
+        'type': 'line',
+        'x0': mean(grades[metric][group]),
+        'x1': mean(grades[metric][group]),
+        'xref': 'x',
+        'y0': -0.09,
+        'y1': 1,
+        'yref': 'paper'
+    }],
+    annotations: [{
+        x: mean(grades[metric][group]),
+        y: -.1,
+        xref: 'x',
+        yref: 'paper',
+        text: "mean = " + mean(grades[metric][group]).toFixed(1),
+        showarrow: true,
+        arrowhead: 7,
+        ax: 1,
+        ay: 1,
+        axref: 'paper',
+        ayref: 'paper'
+    }]
 };
 
 function makePlot() {
@@ -39,6 +64,10 @@ function refreshPlot() {
     plotData[0].xbins.end = totalPoints[metric] * 1.025;
     plotData[0].xbins.size = totalPoints[metric] / 20;
     layout.xaxis.dtick = totalPoints[metric] / 10;
+    layout.shapes[0].x0 = mean(grades[metric][group]);
+    layout.shapes[0].x1 = mean(grades[metric][group]);
+    layout.annotations[0].x = mean(grades[metric][group]);
+    layout.annotations[0].text = "Mean = " + mean(grades[metric][group]).toFixed(1);
     //Plotly.purge(plotID);
     //$('#' + plotID).empty();
     Plotly.redraw(plotID);
@@ -61,3 +90,14 @@ $(document).ready(function () {
         refreshPlot();
     })
 });
+
+// Stats functions
+function mean(numbers) {
+    // mean of [3, 5, 4, 4, 1, 1, 2, 3] is 2.875
+    var total = 0,
+        i;
+    for (i = 0; i < numbers.length; i += 1) {
+        total += numbers[i];
+    }
+    return total / numbers.length;
+}
